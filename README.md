@@ -6,11 +6,15 @@ Please note: all the .c files are located in the Linux directory.
 1. Make sure that the random-gcc.h file and the there .c files are in the same directory.
 
 2. Then, you can compile the code (e.g., BPSO-OCSG-gcc.c) using gcc:
+   
 gcc BPSO-OCSG-gcc.c -o bpso -lm /* bpso is the name of the output file */
 
-3. After that, run the generated executable:
+4. After that, run the generated executable:
+   
 ./bpso    /* on Linux or macOS */
+
 or 
+
 bpso.exe  /* on Windows (using MinGW or Cygwin)*/
 
 # (C++ for Windows) How to Compile Our .cpp File Using Visual Studio 2013
