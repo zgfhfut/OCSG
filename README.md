@@ -1,7 +1,20 @@
 # Solving Overlapping Coalition Structure Generation in Task-Based Settings
 The test instances and codes for the manuscript submitted to Journal of Artificial Intelligence Research.
 
-# How to Compile Our .cpp File Using Visual Studio 2013
+# (Standard C for Unix/linux/Windows or any other platform) How to Compile our .c File 
+Please note: all the .c files are located in the Linux directory.
+1. Make sure that the random-gcc.h file and the there .c files are in the same directory.
+
+2. Then, you can compile the code (e.g., BPSO-OCSG-gcc.c) using gcc:
+gcc BPSO-OCSG-gcc.c -o bpso -lm /* bpso is the name of the output file */
+
+3. After that, run the generated executable:
+./bpso    /* on Linux or macOS */
+or 
+bpso.exe  /* on Windows (using MinGW or Cygwin)*/
+
+# (C++ for Windows) How to Compile Our .cpp File Using Visual Studio 2013
+Please note: all the .cpp files are located in the Window directory.
 1.Open Visual Studio 2013
 
 Launch Visual Studio 2013 from your Start menu or desktop shortcut.
