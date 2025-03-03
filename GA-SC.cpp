@@ -1,4 +1,4 @@
-// GA-OCSG.cpp : ¶¨Òå¿ØÖÆÌ¨Ó¦ÓÃ³ÌĞòµÄÈë¿Úµã¡£
+// GA-OCSG.cpp : å®šä¹‰æ§åˆ¶å°åº”ç”¨ç¨‹åºçš„å…¥å£ç‚¹ã€‚
 //
 /* This is a GA for the Overlapping Coalition Structure Generation Problem.
 **********************************************************************
@@ -36,7 +36,7 @@
 #define min(a,b) (((a)<(b))?(a):(b))
 
 /********************************************************************/
-#define MAX_EXPERIMENT  30  /*Experimental times*/
+#define MAX_EXPERIMENT  1  /*Experimental times*/
 
 #define maxpop   30  /*Max population */
 #define MAX_GENERATION  500  /*Max no. of generation*/
@@ -50,38 +50,38 @@ double pmut_b;          /*Mutation Probability*/
 int no_suite = 13;
 
 int Resource_Agent[maxagent][maxresource] = {
-	18,16,16,17,18,11,18,14,12,13,11,11,16,
-	13,14,15,21,17,11,17,14,14,13,10,12,16,
-	18,14,15,18,13,10,13,14,13,14,9,15,18,
-	17,15,16,18,16,12,17,13,12,16,10,17,13,
-	15,18,16,16,17,9,13,15,10,16,14,14,17,
-	14,17,14,19,19,11,12,11,15,18,12,13,18,
-	17,18,17,20,16,8,14,13,10,13,9,16,13,
-	12,17,14,14,14,12,14,11,15,17,14,14,17,
-	17,17,12,15,16,11,13,15,14,17,10,14,12,
-	18,18,16,18,12,12,16,13,15,12,13,17,18,
-	12,13,13,19,18,8,15,13,10,14,14,11,14,
-	17,13,13,18,12,10,19,15,15,16,11,14,16,
-	18,17,16,18,15,9,19,15,12,16,14,16,18,
-	18,13,13,19,16,11,18,11,13,12,12,16,15,
-	12,14,12,14,12,9,19,12,11,13,11,15,18,
-	13,12,16,19,19,9,16,15,13,17,14,11,13,
-	18,16,15,20,14,8,18,10,12,13,10,11,18,
-	12,17,12,21,15,12,18,12,12,16,11,15,19,
-	16,12,13,19,13,10,17,14,11,17,13,14,19,
-	18,17,27,17,40,44,20,12,26,31,26,16,21,};
+	18, 16, 16, 17, 18, 11, 18, 14, 12, 13, 11, 11, 16,
+	13, 14, 15, 21, 17, 11, 17, 14, 14, 13, 10, 12, 16,
+	18, 14, 15, 18, 13, 10, 13, 14, 13, 14, 9, 15, 18,
+	17, 15, 16, 18, 16, 12, 17, 13, 12, 16, 10, 17, 13,
+	15, 18, 16, 16, 17, 9, 13, 15, 10, 16, 14, 14, 17,
+	14, 17, 14, 19, 19, 11, 12, 11, 15, 18, 12, 13, 18,
+	17, 18, 17, 20, 16, 8, 14, 13, 10, 13, 9, 16, 13,
+	12, 17, 14, 14, 14, 12, 14, 11, 15, 17, 14, 14, 17,
+	17, 17, 12, 15, 16, 11, 13, 15, 14, 17, 10, 14, 12,
+	18, 18, 16, 18, 12, 12, 16, 13, 15, 12, 13, 17, 18,
+	12, 13, 13, 19, 18, 8, 15, 13, 10, 14, 14, 11, 14,
+	17, 13, 13, 18, 12, 10, 19, 15, 15, 16, 11, 14, 16,
+	18, 17, 16, 18, 15, 9, 19, 15, 12, 16, 14, 16, 18,
+	18, 13, 13, 19, 16, 11, 18, 11, 13, 12, 12, 16, 15,
+	12, 14, 12, 14, 12, 9, 19, 12, 11, 13, 11, 15, 18,
+	13, 12, 16, 19, 19, 9, 16, 15, 13, 17, 14, 11, 13,
+	18, 16, 15, 20, 14, 8, 18, 10, 12, 13, 10, 11, 18,
+	12, 17, 12, 21, 15, 12, 18, 12, 12, 16, 11, 15, 19,
+	16, 12, 13, 19, 13, 10, 17, 14, 11, 17, 13, 14, 19,
+	18, 17, 27, 17, 40, 44, 20, 12, 26, 31, 26, 16, 21, };
 
 int Resource_Goal[maxgoal][maxresource] = {
-	13,7,11,11,5,4,11,5,4,5,6,12,7,//10,//5,4,//8,9,//8,11,//8,9,//10,5,10,
-	12,10,4,18,7,6,12,10,5,15,10,8,6,//8,//9,8,//10,9,//7,7,//12,9,//10,15,10,
-	6,10,8,16,6,9,10,9,7,12,8,11,14,//10,//15,5,//17,5,//6,12,//7,14,//9,11,4,
-	6,5,5,12,6,12,10,10,10,14,12,13,12,//15,//9,10,//18,4,//11,5,//9,13,//8,8,13,
-	9,16,8,11,11,12,12,7,5,10,10,10,14,//5,//9,11,//16,8,//8,9,//4,14,//6,9,8,
-	12,7,9,5,13,8,13,9,9,5,9,11,10,//8,//6,4,//7,9,//5,11,//6,9,//5,14,13,
-	11,12,9,9,18,4,11,6,8,6,9,10,15,//14,//12,8,//12,9,//9,6,//13,11,//7,15,8,
-	12,5,17,9,21,12,4,15,13,14,8,7,13,//9,//10,6,//5,14,//5,11,//11,12,//5,6,9,
-	11,17,13,21,11,6,9,12,6,8,7,6,11,//14,//13,18,//17,6,//9,11,//11,5,//11,14,13,
-	12,13,16,8,12,6,16,4,21,15,3,6,7,//12,//7,8,//9,12,//17,15,//14,10,//5,12,6,
+	13, 7, 11, 11, 5, 4, 11, 5, 4, 5, 6, 12, 7,//10,//5,4,//8,9,//8,11,//8,9,//10,5,10,
+	12, 10, 4, 18, 7, 6, 12, 10, 5, 15, 10, 8, 6,//8,//9,8,//10,9,//7,7,//12,9,//10,15,10,
+	6, 10, 8, 16, 6, 9, 10, 9, 7, 12, 8, 11, 14,//10,//15,5,//17,5,//6,12,//7,14,//9,11,4,
+	6, 5, 5, 12, 6, 12, 10, 10, 10, 14, 12, 13, 12,//15,//9,10,//18,4,//11,5,//9,13,//8,8,13,
+	9, 16, 8, 11, 11, 12, 12, 7, 5, 10, 10, 10, 14,//5,//9,11,//16,8,//8,9,//4,14,//6,9,8,
+	12, 7, 9, 5, 13, 8, 13, 9, 9, 5, 9, 11, 10,//8,//6,4,//7,9,//5,11,//6,9,//5,14,13,
+	11, 12, 9, 9, 18, 4, 11, 6, 8, 6, 9, 10, 15,//14,//12,8,//12,9,//9,6,//13,11,//7,15,8,
+	12, 5, 17, 9, 21, 12, 4, 15, 13, 14, 8, 7, 13,//9,//10,6,//5,14,//5,11,//11,12,//5,6,9,
+	11, 17, 13, 21, 11, 6, 9, 12, 6, 8, 7, 6, 11,//14,//13,18,//17,6,//9,11,//11,5,//11,14,13,
+	12, 13, 16, 8, 12, 6, 16, 4, 21, 15, 3, 6, 7,//12,//7,8,//9,12,//17,15,//14,10,//5,12,6,
 };
 
 
@@ -161,14 +161,14 @@ typedef struct
 }population2;             /*Population Structure*/
 
 
-						  /********************************************************************/
+/********************************************************************/
 void input(); /*Input Parameters from user*/
 void bininit(population *pop_ptr);/*initializes the population*/
-void nselect(population *old_pop_ptr, population *pop2_ptr);//tournament selection//Ñ¡Ôñ30¸öºÃµÄÀ´½øĞĞ½»²æ
+void nselect(population *old_pop_ptr, population *pop2_ptr);//tournament selection//é€‰æ‹©30ä¸ªå¥½çš„æ¥è¿›è¡Œäº¤å‰
 
 void bincross(population *new_pop_ptr, population *mate_pop_ptr);/*binary crossover*/
 void binmutate(population *new_pop_ptr);/*binary mutation*/
-void keepbetter(population *old_pop_ptr, population *new_pop_ptr, population2 *comb_pop_ptr);//È¡Ç°30¸ö
+void keepbetter(population *old_pop_ptr, population *new_pop_ptr, population2 *comb_pop_ptr);//å–å‰30ä¸ª
 void pop_repair(population *pop_ptr);
 
 void xiao_repair(individual *ind_ptr);
@@ -195,18 +195,18 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	FILE *obj_ptr;
 	char file1[500];
-	sprintf_s(file1, "E:\\xiao3\\SC\\SC\\GA-SC\\expriment3\\resource\\relax\\val_suite%d.txt", no_suite);
+	sprintf_s(file1, "val_suite%d.txt", no_suite);
 	fopen_s(&obj_ptr, file1, "w+");
 
 
 	FILE *tim_ptr;
 	char file2[500];
-	sprintf_s(file2, "E:\\xiao3\\SC\\SC\\GA-SC\\expriment3\\resource\\relax\\tim_suite%d.txt", no_suite);
+	sprintf_s(file2, "tim_suite%d.txt", no_suite);
 	fopen_s(&tim_ptr, file2, "w+");
 
 	FILE *enc_ptr;
 	char file3[500];
-	sprintf_s(file3, "E:\\xiao3\\SC\\SC\\GA-SC\\expriment3\\resource\\relax\\enc_suite%d.txt", no_suite);
+	sprintf_s(file3, "enc_suite%d.txt", no_suite);
 	fopen_s(&enc_ptr, file3, "w+");
 
 	int int_exp = 0;
@@ -318,7 +318,7 @@ int _tmain(int argc, _TCHAR* argv[])
 			new_pop_ptr = &(newpop);
 			func(new_pop_ptr);//----------FUNCTION EVALUATION-----------
 
-							  //-------------------SELECTION KEEPING Better Individuals--------------
+			//-------------------SELECTION KEEPING Better Individuals--------------
 			old_pop_ptr = &(oldpop);
 			new_pop_ptr = &(newpop);
 			comb_pop_ptr = &(combpop);
@@ -334,7 +334,8 @@ int _tmain(int argc, _TCHAR* argv[])
 		//////////////////////////////////////////////////////////////////////////				
 		fprintf_s(obj_ptr, "%d, ", old_pop_ptr->ind[0].fitness);
 
-		fprintf_s(enc_ptr, "%s%d\n", "expriment", int_exp + 1);
+		
+		fprintf_s(enc_ptr, "%s", "The best solution:\n");
 		for (i = 0; i < maxgoal; i++)
 		{
 			for (j = 0; j < maxagent; j++)
@@ -371,7 +372,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	fclose(enc_ptr);
 
 	printf_s("successful!\n");
-	system("pause");
+//	system("pause");
 
 	return 0;
 }
@@ -880,8 +881,8 @@ void xiao_repair(individual* ind_ptr)
 		rnd1 = row * rnd1;
 		demo_row = (int)floor(rnd1);
 		selected = save_row[demo_row];//select randomly a row
-									  /****************************************************************************************/
-									  //determine whether the goal can be satisfied?
+		/****************************************************************************************/
+		//determine whether the goal can be satisfied?
 		for (j = 0; j < maxagent; j++)
 		{
 			if (Interest_Set[j][selected] == 1)
@@ -934,13 +935,13 @@ void xiao_repair(individual* ind_ptr)
 				if (ind_ptr->bincode[selected][is_one[j]] == 1)
 				{
 					ind_ptr->bincode[selected][is_one[j]] = 0;//let all bits ``1'' exit from the coalition
-															  //num_zero_operations++;
+					//num_zero_operations++;
 				}
 			}
 		}
 
 
-		
+
 
 		else//can satisfy
 		{
@@ -1036,7 +1037,7 @@ void xiao_repair(individual* ind_ptr)
 				for (j = 0; j <= num_one; j++)
 				{
 					ind_ptr->bincode[selected][is_one[j]] = 0;//covert
-															  //num_zero_operations++;
+					//num_zero_operations++;
 				}
 			}
 
