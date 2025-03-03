@@ -1,0 +1,1 @@
+If the txt file contains only "int Interest_Set[maxagent][maxgoal] = { }", the "int Resource_Agent[maxagent][maxresource] = { };int Resource_Goal[maxgoal][maxresource] = { };int Reward_Goal[maxgoal] = { };" can be found in the previous txt files.
