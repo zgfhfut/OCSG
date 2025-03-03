@@ -13,9 +13,9 @@ Please note: all the .c files are located in the Linux directory.
    
    ./bpso          /* on Linux or macOS */
 
-or 
+   or 
 
-   bpso.exe        /* on Windows (using MinGW or Cygwin)*/
+      bpso.exe        /* on Windows (using MinGW or Cygwin)*/
 
 # (C++ for Windows) How to Compile Our .cpp File Using Visual Studio 2013
 Please note: all the .cpp files are located in the Window directory.
