@@ -7,15 +7,15 @@ Please note: all the .c files are located in the Linux directory.
 
 2. Then, you can compile the code (e.g., BPSO-OCSG-gcc.c) using gcc:
    
-gcc BPSO-OCSG-gcc.c -o bpso -lm /* bpso is the name of the output file */
+   gcc BPSO-OCSG-gcc.c -o bpso -lm       /* bpso is the name of the output file */
 
 4. After that, run the generated executable:
    
-./bpso    /* on Linux or macOS */
+   ./bpso          /* on Linux or macOS */
 
 or 
 
-bpso.exe  /* on Windows (using MinGW or Cygwin)*/
+   bpso.exe        /* on Windows (using MinGW or Cygwin)*/
 
 # (C++ for Windows) How to Compile Our .cpp File Using Visual Studio 2013
 Please note: all the .cpp files are located in the Window directory.
