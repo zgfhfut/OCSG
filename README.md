@@ -1,7 +1,7 @@
 # Solving Overlapping Coalition Structure Generation in Task-Based Settings
 The test instances and codes for the manuscript submitted to Journal of Artificial Intelligence Research.
 
-# (Standard C for Unix/linux/Windows or any other platform) How to Compile our .c File 
+# (Standard C for Unix/linux/Windows or any other platform) How to Compile Our .c File 
 Please note: all the .c files are located in the Linux directory.
 1. Make sure that the random-gcc.h file and the there .c files are in the same directory.
 
