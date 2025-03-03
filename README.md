@@ -34,7 +34,7 @@ In the Solution Explorer (usually on the right side), right-click on the Source 
 
 Select Add > New Item.
 
-In the Add New Item window, choose C++ File (.h).
+In the Add New Item window, choose the random.h File.
 
 5.Paste the Code
 
