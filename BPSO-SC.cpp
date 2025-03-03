@@ -1,4 +1,5 @@
-// BPSO-OCSG.cpp : ∂®“Âøÿ÷∆Ã®”¶”√≥Ã–Úµƒ»Îø⁄µ„°£
+
+// BPSO-OCSG.cpp : ÂÆö‰πâÊéßÂà∂Âè∞Â∫îÁî®Á®ãÂ∫èÁöÑÂÖ•Âè£ÁÇπ„ÄÇ
 //
 
 #include "stdafx.h"
@@ -22,7 +23,7 @@
 #define VMAX 5.0  //the maximal velocity
 
 #define maxpop   30 /*Max population */
- 
+
 #define maxagent    10 /*Max no. of agents */
 #define maxgoal    10 /*Max no. of Goals */
 #define maxresource    3/*Max no. of resources */
@@ -146,13 +147,22 @@ void sleep(clock_t wait)
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	
 
-	
+	FILE *obj_ptr;
+	char file1[500];
+	sprintf_s(file1, "val_suite%d.txt", no_suite);
+	fopen_s(&obj_ptr, file1, "w+");
+
+
+	FILE *tim_ptr;
+	char file2[500];
+	sprintf_s(file2, "tim_suite%d.txt", no_suite);
+	fopen_s(&tim_ptr, file2, "w+");
+
 	char file4[500];
-	sprintf_s(file4, "E:\\BPSO-SC\\enc_suite%d.txt",  no_suite);
+	sprintf_s(file4, "enc_suite%d.txt", no_suite);
 	fopen_s(&bin_ptr, file4, "w+");
-	
+
 
 	int int_exp = 0;
 	int num_goal;
@@ -176,9 +186,9 @@ int _tmain(int argc, _TCHAR* argv[])
 
 
 		clock_t start, finish;
-		double duration = 0; 
+		double duration = 0;
 		start = clock();
-		
+
 
 		population oldpop, *old_pop_ptr;//Defining the population Structures
 
@@ -203,7 +213,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		old_pop_ptr = &(oldpop);
 		bininit(old_pop_ptr);
 
-		old_pop_ptr = &(oldpop);		
+		old_pop_ptr = &(oldpop);
 		pop_repair(old_pop_ptr);
 		old_pop_ptr = &(oldpop);
 		func(old_pop_ptr);
@@ -246,7 +256,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 			old_pop_ptr = &(oldpop);
 			pop_repair(old_pop_ptr);
-			
+
 
 			old_pop_ptr = &(oldpop);
 			func(old_pop_ptr);//----------FUNCTION EVALUATION-----------
@@ -285,14 +295,29 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		}
 
-
+		finish = clock();
+		duration = (double)(finish - start) / CLOCKS_PER_SEC;
 		/*report*/
-	
+
 		//////////////////////////////////////////////////////////////////////////	
-	
-	
+
+		fprintf_s(tim_ptr, "%5.4f, ", duration);
+		//////////////////////////////////////////////////////////////////////////	
+		
+		fprintf_s(obj_ptr, "%d, ", GolbalBestFit);
 
 
+		fprintf_s(bin_ptr, "%s", "The best solution:\n");
+
+		for (i = 0; i < maxgoal; i++)
+		{
+			for (j = 0; j < maxagent; j++)
+			{
+				fprintf_s(bin_ptr, "%d ", Gbest[i][j]);
+			}
+			fprintf_s(bin_ptr, "%s", "\n");
+		}
+		fprintf_s(bin_ptr, "%s", "\n\n\n");
 
 	}
 
@@ -300,7 +325,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	fclose(bin_ptr);
 
 	printf_s("successful!\n");
-	getchar();
+	//getchar();
 
 	return 0;
 }
@@ -436,7 +461,7 @@ void pop_repair(population *pop_ptr)
 
 	for (s = 0; s < maxpop; s++)
 	{
-		
+
 		repair_xiao(pop_ptr->ind_ptr);
 		pop_ptr->ind_ptr = &(pop_ptr->ind[s + 1]);
 	}
@@ -797,14 +822,16 @@ void repair_xiao(particle *ind_ptr)
 
 
 
-	for (i = 0; i < maxgoal; i++)
+	/*	for (i = 0; i < maxgoal; i++)
 	{
-		for (j = 0; j < maxagent; j++)
-		{
-			fprintf_s(bin_ptr, "%d ", ind_ptr->position[i][j]);
-		}
+	for (j = 0; j < maxagent; j++)
+	{
+	fprintf_s(bin_ptr, "%d ", ind_ptr->position[i][j]);
 	}
-	fprintf_s(bin_ptr, "%s", "\n");}
+	fprintf_s(bin_ptr, "%s", "\n");
+	}
+	fprintf_s(bin_ptr, "%s", "\n\n\n");*/
+}
 
 
 bool no_needed(int agent_res[maxresource], int goal_res[maxresource])
