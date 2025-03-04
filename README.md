@@ -3,6 +3,7 @@ The test instances and codes for the manuscript submitted to Journal of Artifici
 
 # (Standard C for Unix/linux/Windows or any other platform) How to Compile Our .c File 
 Please note: all the .c files are located in the Linux directory.
+
 1. Make sure that the random-gcc.h file and the there .c files are in the same directory.
 
 2. Then, you can compile the code (e.g., BPSO-OCSG-gcc.c) using gcc:
@@ -19,6 +20,8 @@ Please note: all the .c files are located in the Linux directory.
 
 # (C++ for Windows) How to Compile Our .cpp File Using Visual Studio 2013
 Please note: all the .cpp files are located in the Window directory.
+
+
 1.Open Visual Studio 2013
 
 Launch Visual Studio 2013 from your Start menu or desktop shortcut.
